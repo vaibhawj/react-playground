@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Grid, TextareaAutosize } from '@material-ui/core'
-import { AppContext } from '../App';
+import { useFeedbackContext } from '../hooks/useFeedbackContext';
 
 export default () => {
     const history = useHistory();
-    const { customerInfo, emailContent: emailContentContext, setEmailContent: setEmailContentContext } = useContext(AppContext);
+    const { customerInfo, emailContent: emailContentContext, setEmailContent: setEmailContentContext } = useFeedbackContext();
     const [emailContentState, setEmailConentState] = useState(emailContentContext);
 
     console.log("Rendering EmailContent");

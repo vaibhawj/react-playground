@@ -1,8 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Grid, TextField } from '@material-ui/core';
-import useFeedback from '../hooks/useFeedback';
-import { AppContext } from '../App';
+import { useFeedbackContext } from '../hooks/useFeedbackContext';
 
 
 const handleChange = (value, setter) => {
@@ -11,7 +10,7 @@ const handleChange = (value, setter) => {
 
 export default () => {
     const history = useHistory();
-    const { customerInfo, setCustomerInfo } = useContext(AppContext);
+    const  { customerInfo, setCustomerInfo } = useFeedbackContext();
 
     const [firstName, setFirstName] = useState(customerInfo.firstName)
     const [lastName, setLastName] = useState(customerInfo.lastName)

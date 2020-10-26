@@ -1,22 +1,11 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import reducer from '../reducer';
 
-export const AppContext = createContext();
+export const FeedbackContext = createContext();
 
-export const AppContextProvider = (props) => {
-    return <AppContext.Provider>{props.children}</AppContext.Provider>
-}
+export const useFeedbackContext = () => useContext(FeedbackContext);
 
-const initialState = {
-    customerInfo: {
-        firstName: "",
-        lastName: "",
-        emailId: ""
-    },
-    emailContent: ""
-}
-
-export default () => {
+export const FeedbackContextProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const { customerInfo, emailContent } = state
@@ -37,5 +26,16 @@ export default () => {
             }
         })
     }
-    return [customerInfo, setCustomerInfo, emailContent, setEmailContent];
+    const value = { customerInfo, setCustomerInfo, emailContent, setEmailContent };
+
+    return (<FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>)
+}
+
+const initialState = {
+    customerInfo: {
+        firstName: "",
+        lastName: "",
+        emailId: ""
+    },
+    emailContent: ""
 }
