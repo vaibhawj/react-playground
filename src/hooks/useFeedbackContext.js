@@ -5,7 +5,16 @@ export const FeedbackContext = createContext();
 
 export const useFeedbackContext = () => useContext(FeedbackContext);
 
-export const FeedbackContextProvider = (props) => {
+const initialState = {
+    customerInfo: {
+        firstName: "",
+        lastName: "",
+        emailId: ""
+    },
+    emailContent: ""
+}
+
+const FeedbackContextProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const { customerInfo, emailContent } = state
@@ -31,11 +40,6 @@ export const FeedbackContextProvider = (props) => {
     return (<FeedbackContext.Provider value={value}>{props.children}</FeedbackContext.Provider>)
 }
 
-const initialState = {
-    customerInfo: {
-        firstName: "",
-        lastName: "",
-        emailId: ""
-    },
-    emailContent: ""
+export const withFeedbackContextProvider = (wrappedComponent) => {
+return (<FeedbackContextProvider>{wrappedComponent}</FeedbackContextProvider>)
 }
